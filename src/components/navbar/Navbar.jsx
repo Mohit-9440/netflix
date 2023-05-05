@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './navbar.scss';
 import { ArrowDropDown, Notifications, Search } from '@material-ui/icons';
 
 const Navbar = () => {
+  const[isScrolled, setIsScrolled] = useState(false);
+
+  window.onscroll = () => {
+    setIsScrolled(window.pageYOffset === 0 ? false : true)
+    return () => (window.onscroll = null);
+  };
+
+  console.log(isScrolled)
   return (
-    <div className='navbar'>
+    <div className= { isScrolled ? 'navbar scrolled' : "navbar"}>
         <div class="container">
           <div className='left'>
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png" alt=""/>
@@ -19,8 +27,14 @@ const Navbar = () => {
             <span>KID</span>
             <Notifications className='icon'/>
             <img src='https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500' alt='' />
-            <ArrowDropDown className='icon'/>
 
+            <div class="profile">
+              <ArrowDropDown className='icon'/>
+              <div class="options">
+                <span>Settings</span>
+                <span>Logout</span>
+              </div>
+            </div>
           </div>
         </div>
     </div>
